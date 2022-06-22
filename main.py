@@ -1,16 +1,29 @@
-# This is a sample Python script.
+import lib.PhenomenonPlot as pp
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# ------------------------------------- #
+# ---------- FLAGS
+# ------------------------------------- #
 
+COLOR_PALETTE_CASES = {
+    "color-list": ['blue', 'lightblue', 'yellow', 'orange', 'red'],
+    "range-list": ['0-500', '501-1000', '1001-1500', '1501-2000', '>2000']
+}
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+COLOR_PALETTE_DEATH = {
+    "color-list": ['blue', 'lightblue', 'yellow', 'orange', 'red'],
+    "range-list": ['0-5', '6-10', '11-15', '16-20', '>20']
+}
 
+SHP_FILE_PATH = 'data/shp/tunisia/Tunisia_region.shp'
+CSV_FILE_PATH = 'data/csv/tunisia/new_cases.csv'
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+COMMON_COLUMN = 'REGION'
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# ------------------------------------- #
+# ---------- MAIN CODE
+# ------------------------------------- #
+
+casesTun = pp.PhenomenonPlot()
+casesTun.SHP_Read(SHP_FILE_PATH)
+casesTun.CSV_Read(CSV_FILE_PATH)
+casesTun.create_GeoJSON(COMMON_COLUMN, color_palette=COLOR_PALETTE_CASES)
